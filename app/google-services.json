@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "759831490128",
+    "project_id": "props-4155f"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759831490128:android:30bb07cace790bc0",
+        "android_client_info": {
+          "package_name": "com.lahacks.props"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759831490128-k6sija6q67rnuk7u7f987rsc6i5k3ork.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lahacks.props",
+            "certificate_hash": "c11fcc36badd0fa55a99e263bba4e9d99ee1bb65"
+          }
+        },
+        {
+          "client_id": "759831490128-da2t474tj3cpcbtka1tfenie0qm4g2jn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXPPnIvIhAbguctSCxBtV3IZI6zGwdcGk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
