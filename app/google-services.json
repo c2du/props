@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "759831490128",
-    "project_id": "props-4155f"
+    "project_number": "55204598275",
+    "project_id": "props-766d2"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:759831490128:android:30bb07cace790bc0",
+        "mobilesdk_app_id": "1:55204598275:android:30bb07cace790bc0",
         "android_client_info": {
           "package_name": "com.lahacks.props"
         }
       },
       "oauth_client": [
         {
-          "client_id": "759831490128-k6sija6q67rnuk7u7f987rsc6i5k3ork.apps.googleusercontent.com",
+          "client_id": "55204598275-56dnlbon9ajfiihphgdojom7dbgf0vth.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.lahacks.props",
-            "certificate_hash": "c11fcc36badd0fa55a99e263bba4e9d99ee1bb65"
+            "certificate_hash": "571ca7bacd2333c5f531fabcf81b71c8399a0355"
           }
         },
         {
-          "client_id": "759831490128-da2t474tj3cpcbtka1tfenie0qm4g2jn.apps.googleusercontent.com",
+          "client_id": "55204598275-5o1qscbl0a6qvkal8q9v0fa9f49as869.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCXPPnIvIhAbguctSCxBtV3IZI6zGwdcGk"
+          "current_key": "AIzaSyDortrTjwNwhPwq0Y89u8PfUNneNvGPlGI"
         }
       ],
       "services": {
