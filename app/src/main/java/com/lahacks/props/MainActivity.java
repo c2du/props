@@ -1,16 +1,90 @@
 package com.lahacks.props;
 
+import android.app.ListActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
+import com.estimote.sdk.Beacon;
+import com.estimote.sdk.BeaconManager;
+import com.estimote.sdk.Region;
 import com.estimote.sdk.SystemRequirementsChecker;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class MainActivity extends ListActivity {
+
+    private BeaconManager beaconManager;
+    private Region region;
+
+    ArrayList<String> listItems = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+
+    private static final Map<String, List<String>> PLACES_BY_BEACONS;
+
+    static {
+        Map<String, List<String>> placesByBeacons = new HashMap<>();
+        placesByBeacons.put("27539:50765", new ArrayList<String>() {{
+            add("Cacao Babao");
+            // read as: "Heavenly Sandwiches" is closest
+            // to the beacon with major 22504 and minor 48827
+            //add("Green & Green Salads");
+            // "Green & Green Salads" is the next closest
+            //add("Mini Panini");
+            // "Mini Panini" is the furthest away
+        }});
+        /*placesByBeacons.put("648:12", new ArrayList<String>() {{
+            add("Mini Panini");
+            add("Green & Green Salads");
+            add("Heavenly Sandwiches");
+        }});*/
+        PLACES_BY_BEACONS = Collections.unmodifiableMap(placesByBeacons);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //closest = (TextView) findViewById(R.id.display_closest);
+
+        adapter = new ArrayAdapter<> (this, android.R.layout.simple_list_item_1, listItems);
+        setListAdapter(adapter);
+
+        beaconManager = new BeaconManager(this);
+
+        beaconManager.setRangingListener(new BeaconManager.RangingListener() {
+            @Override
+            public void onBeaconsDiscovered(Region region, List<Beacon> list) {
+                if (!list.isEmpty()) {
+                    listItems.clear();
+                    adapter.notifyDataSetChanged();
+
+                    for (int i = 0; i < list.size(); i++) {
+                        Beacon nextBeacon = list.get(i);
+                        listItems.add(nextBeacon.getMajor() + ", " +  nextBeacon.getMinor());
+                        Log.d("Airport", nextBeacon.toString());
+                    }
+                    adapter.notifyDataSetChanged();
+                    //Beacon nearestBeacon = list.get(0);
+                    //Log.d("Airport", String.valueOf(list.size()));
+                    //List<String> places = placesNearBeacon(nearestBeacon);
+
+                    // update the UI here
+                    //closest.setText(nearestBeacon.toString());
+                    //Log.d("Airport", nearestBeacon.toString());
+                }
+            }
+        });
+
+        region = new Region("ranged region",
+                UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), null, null);
     }
 
     @Override
@@ -35,5 +109,27 @@ public class MainActivity extends AppCompatActivity {
         major number, an unsigned short integer, i.e., an integer ranging from 1 to 65535, (0 is a reserved value)
         minor number, also an unsigned short integer, like the major number.
          */
+
+        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+            @Override
+            public void onServiceReady() {
+                beaconManager.startRanging(region);
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        beaconManager.stopRanging(region);
+
+        super.onPause();
+    }
+
+    private List<String> placesNearBeacon(Beacon beacon) {
+        String beaconKey = String.format("%d:%d", beacon.getMajor(), beacon.getMinor());
+        if (PLACES_BY_BEACONS.containsKey(beaconKey)) {
+            return PLACES_BY_BEACONS.get(beaconKey);
+        }
+        return Collections.emptyList();
     }
 }
