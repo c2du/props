@@ -6,6 +6,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Debug;
+import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
@@ -21,9 +24,11 @@ import java.util.UUID;
 public class MyApplication extends Application {
 
     private BeaconManager beaconManager;
+    private int beaconFlag;
 
     @Override
     public void onCreate() {
+        beaconFlag = 0;
         super.onCreate();
 
         beaconManager = new BeaconManager(getApplicationContext());
@@ -34,6 +39,7 @@ public class MyApplication extends Application {
                 showNotification(
                         "Entered vacinity of beacon.",
                         "Congrats");
+                Log.d("STUFF", "Entered beacon range");
             }
             @Override
             public void onExitedRegion(Region region) {
