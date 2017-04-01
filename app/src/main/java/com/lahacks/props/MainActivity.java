@@ -1,6 +1,11 @@
 package com.lahacks.props;
 
 import android.app.ListActivity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,10 +67,11 @@ public class MainActivity extends ListActivity {
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
             @Override
             public void onBeaconsDiscovered(Region region, List<Beacon> list) {
+
                 if (!list.isEmpty()) {
                     listItems.clear();
                     adapter.notifyDataSetChanged();
-
+                    //showNotification("Props", "Beacons nearby");
                     for (int i = 0; i < list.size(); i++) {
                         Beacon nextBeacon = list.get(i);
                         listItems.add(nextBeacon.getMajor() + ", " +  nextBeacon.getMinor());
@@ -131,5 +137,23 @@ public class MainActivity extends ListActivity {
             return PLACES_BY_BEACONS.get(beaconKey);
         }
         return Collections.emptyList();
+    }
+
+    public void showNotification(String title, String message) {
+        Intent notifyIntent = new Intent(this, MainActivity.class);
+        notifyIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivities(this, 0,
+                new Intent[] { notifyIntent }, PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification notification = new Notification.Builder(this)
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .build();
+        notification.defaults |= Notification.DEFAULT_SOUND;
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notification);
     }
 }

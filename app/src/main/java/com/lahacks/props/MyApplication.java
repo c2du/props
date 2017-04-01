@@ -37,15 +37,15 @@ public class MyApplication extends Application {
             @Override
             public void onEnteredRegion(Region region, List<Beacon> list) {
                 showNotification(
-                        "Entered vacinity of beacon.",
-                        "Congrats");
+                        "Props",
+                        "Beacons found");
                 Log.d("STUFF", "Entered beacon range");
             }
             @Override
             public void onExitedRegion(Region region) {
                 // could add an "exit" notification too if you want (-:
-                showNotification("Exited vacinity of beacon.",
-                                  "Salute");
+                showNotification("Props",
+                                  "No beacons found");
             }
         });
 
@@ -71,8 +71,9 @@ public class MyApplication extends Application {
                 .setSmallIcon(android.R.drawable.ic_dialog_info)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setAutoCancel(true)
+                .setAutoCancel(false)
                 .setContentIntent(pendingIntent)
+                .setPriority(Notification.PRIORITY_HIGH)
                 .build();
         notification.defaults |= Notification.DEFAULT_SOUND;
         NotificationManager notificationManager =
