@@ -74,15 +74,15 @@ public class SelectCoinActivity extends AppCompatActivity {
             }
         });
 
-      /*  Button btn6 = (Button)findViewById(R.id.button6);
+       Button btn6 = (Button)findViewById(R.id.button6);
 
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SelectCoinActivity.this, .class);
+                Intent intent = new Intent(SelectCoinActivity.this, CustomListAdapter.class);
                 startActivity(intent);
             }
-        });*/
+        });
 
 
     }
