@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Payment Receipt"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="132dp"
+        android:minHeight="0dp"
+        android:scaleX="6"
+        android:scaleY="6"
+        app:srcCompat="@drawable/ic_receipt" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageView"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="115dp"
+        android:text="You gave"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/textViewCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView8"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/imageView"
+        android:text="ok"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewCoin"
+        android:layout_marginTop="10dp"
+        android:layout_toStartOf="@+id/imageView"
+        android:text="to"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView10"
+        android:layout_alignBottom="@+id/textView10"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/textView10"
+        android:text="Sarah!"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView10"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="Props all around!"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/colorPrimaryDark" />
+
+</RelativeLayout>

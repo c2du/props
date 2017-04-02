@@ -51,8 +51,8 @@ public class confirmCoinChoice extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-         //       Intent intent = new Intent(confirmCoinChoice.this, .class);
-           //     startActivity(intent);
+                Intent intent = new Intent(confirmCoinChoice.this, PaymentReciept.class);
+                startActivity(intent);
             }
         });
     }

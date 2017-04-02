@@ -20,7 +20,6 @@ import android.widget.EditText;
 
 public class SelectCoinActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.lahacks.props.MESSAGE";
-    Button button2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
