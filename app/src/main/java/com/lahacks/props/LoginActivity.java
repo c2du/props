@@ -19,9 +19,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.lahacks.props.Entity.PropsUserRequest;
+import com.lahacks.props.Entity.User;
+import com.lahacks.props.Services.PropService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity implements
             GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
@@ -33,10 +41,21 @@ public class LoginActivity extends AppCompatActivity implements
         private TextView mStatusTextView;
         private ProgressDialog mProgressDialog;
 
+        private PropService propService;
+
+        private final String baseUrl = "https://propstoyou.herokuapp.com/";
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_login);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            propService = retrofit.create(PropService.class);
 
             // Views
            // mStatusTextView = (TextView) findViewById(R.id.status);
@@ -116,6 +135,29 @@ public class LoginActivity extends AppCompatActivity implements
             if (result.isSuccess()) {
                 // Signed in successfully, show authenticated UI.
                 GoogleSignInAccount acct = result.getSignInAccount();
+                User newUser = new User();
+                newUser.setFirstName("Connie");
+                newUser.setLastName("Du");
+                newUser.setRole("donator");
+                newUser.setEmail("c2du@ucsd.edu");
+
+                Call<User> call = propService.createUser(new PropsUserRequest(newUser));
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if (response.isSuccessful()) {
+                            System.out.println("Create user response successful");
+                        } else {
+                            System.out.println("Create user response not successful");
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        // something went completely south (like no internet connection)
+                        Log.d("Error", t.getMessage());
+                    }
+                });
+
                // mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
 
                 updateUI(true);

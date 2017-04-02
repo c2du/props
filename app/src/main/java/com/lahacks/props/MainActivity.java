@@ -1,5 +1,6 @@
 package com.lahacks.props;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -9,8 +10,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
@@ -21,46 +26,32 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends Activity {
 
     private BeaconManager beaconManager;
     private Region region;
+    private ListView mlistview;
 
     ArrayList<String> listItems = new ArrayList<>();
     ArrayAdapter<String> adapter;
-
-    private static final Map<String, List<String>> PLACES_BY_BEACONS;
-
-    static {
-        Map<String, List<String>> placesByBeacons = new HashMap<>();
-        placesByBeacons.put("27539:50765", new ArrayList<String>() {{
-            add("Cacao Babao");
-            // read as: "Heavenly Sandwiches" is closest
-            // to the beacon with major 22504 and minor 48827
-            //add("Green & Green Salads");
-            // "Green & Green Salads" is the next closest
-            //add("Mini Panini");
-            // "Mini Panini" is the furthest away
-        }});
-        /*placesByBeacons.put("648:12", new ArrayList<String>() {{
-            add("Mini Panini");
-            add("Green & Green Salads");
-            add("Heavenly Sandwiches");
-        }});*/
-        PLACES_BY_BEACONS = Collections.unmodifiableMap(placesByBeacons);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //closest = (TextView) findViewById(R.id.display_closest);
-
+        mlistview = (ListView) findViewById(R.id.list);
         adapter = new ArrayAdapter<> (this, android.R.layout.simple_list_item_1, listItems);
-        setListAdapter(adapter);
+        mlistview.setAdapter(adapter);
+
+        mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView <? > arg0, View view, int position, long id) {
+                // When clicked, show a toast with the clicked text
+                Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
         beaconManager = new BeaconManager(this);
 
@@ -71,20 +62,14 @@ public class MainActivity extends ListActivity {
                 if (!list.isEmpty()) {
                     listItems.clear();
                     adapter.notifyDataSetChanged();
-                    //showNotification("Props", "Beacons nearby");
+
                     for (int i = 0; i < list.size(); i++) {
                         Beacon nextBeacon = list.get(i);
                         listItems.add(nextBeacon.getMajor() + ", " +  nextBeacon.getMinor());
                         Log.d("Airport", nextBeacon.toString());
                     }
                     adapter.notifyDataSetChanged();
-                    //Beacon nearestBeacon = list.get(0);
-                    //Log.d("Airport", String.valueOf(list.size()));
-                    //List<String> places = placesNearBeacon(nearestBeacon);
 
-                    // update the UI here
-                    //closest.setText(nearestBeacon.toString());
-                    //Log.d("Airport", nearestBeacon.toString());
                 }
             }
         });
@@ -129,14 +114,6 @@ public class MainActivity extends ListActivity {
         beaconManager.stopRanging(region);
 
         super.onPause();
-    }
-
-    private List<String> placesNearBeacon(Beacon beacon) {
-        String beaconKey = String.format("%d:%d", beacon.getMajor(), beacon.getMinor());
-        if (PLACES_BY_BEACONS.containsKey(beaconKey)) {
-            return PLACES_BY_BEACONS.get(beaconKey);
-        }
-        return Collections.emptyList();
     }
 
     public void showNotification(String title, String message) {
