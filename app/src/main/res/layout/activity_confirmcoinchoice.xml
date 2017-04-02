@@ -49,14 +49,13 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_alignEnd="@+id/textView3"
-        android:layout_marginEnd="38dp"
         android:background="@drawable/gradientbloo"
         android:text="Yes"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/button2"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_toEndOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView4"
@@ -64,7 +63,16 @@
         android:layout_height="wrap_content"
         android:text="correct?"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="77dp" />
+        android:layout_toStartOf="@+id/textView4" />
 </RelativeLayout>

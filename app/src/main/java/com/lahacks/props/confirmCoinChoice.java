@@ -26,14 +26,34 @@ public class confirmCoinChoice extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_display_message);
+        setContentView(R.layout.activity_confirmcoinchoice);
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String message = intent.getStringExtra(SelectCoinActivity.EXTRA_MESSAGE);
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = (TextView) findViewById(R.id.textView);
+        TextView textView = (TextView) findViewById(R.id.textViewCoin);
         textView.setText(message);
+
+        Button btn2 = (Button)findViewById(R.id.button2);
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(confirmCoinChoice.this, SelectCoinActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button btn3 = (Button)findViewById(R.id.button3);
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+         //       Intent intent = new Intent(confirmCoinChoice.this, .class);
+           //     startActivity(intent);
+            }
+        });
     }
 }

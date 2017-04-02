@@ -38,5 +38,53 @@ public class SelectCoinActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button btn3 = (Button)findViewById(R.id.button3);
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectCoinActivity.this, confirmCoinChoice.class);
+                Button b = (Button) v;
+                intent.putExtra(EXTRA_MESSAGE, b.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+        Button btn4 = (Button)findViewById(R.id.button4);
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectCoinActivity.this, confirmCoinChoice.class);
+                Button b = (Button) v;
+                intent.putExtra(EXTRA_MESSAGE, b.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+        Button btn5 = (Button)findViewById(R.id.button5);
+
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectCoinActivity.this, confirmCoinChoice.class);
+                Button b = (Button) v;
+                intent.putExtra(EXTRA_MESSAGE, b.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+      /*  Button btn6 = (Button)findViewById(R.id.button6);
+
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectCoinActivity.this, .class);
+                startActivity(intent);
+            }
+        });*/
+
+
     }
 }

@@ -23,6 +23,16 @@
         <activity android:name=".MainActivity">
 
         </activity>
+
+        <activity android:name=".SelectCoinActivity">
+
+        </activity>
+
+        <activity android:name=".confirmCoinChoice">
+
+        </activity>
+
+
     </application>
 
 </manifest>
