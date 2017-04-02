@@ -28,11 +28,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ListActivity {
 
     private BeaconManager beaconManager;
     private Region region;
     private ListView mlistview;
+
+    ListView list;
+    String[] itemname ={
+            "John is nearby...",
+            "Sarah is nearby..."
+    };
+
+    Integer[] imgid={
+            R.drawable.ic_john,
+            R.drawable.ic_sarah_small
+    };
 
     ArrayList<String> listItems = new ArrayList<>();
     ArrayAdapter<String> adapter;
@@ -41,15 +52,30 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mlistview = (ListView) findViewById(R.id.list);
-        adapter = new ArrayAdapter<> (this, android.R.layout.simple_list_item_1, listItems);
-        mlistview.setAdapter(adapter);
+//        mlistview = (ListView) findViewById(R.id.list);
+//        adapter = new ArrayAdapter<> (this, android.R.layout.simple_list_item_1, listItems);
+//        mlistview.setAdapter(adapter);
 
-        mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView <? > arg0, View view, int position, long id) {
-                // When clicked, show a toast with the clicked text
-                Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-                        Toast.LENGTH_SHORT).show();
+//        mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView <? > arg0, View view, int position, long id) {
+//                // When clicked, show a toast with the clicked text
+//                Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        CustomListAdapter performerAdapter=new CustomListAdapter(this, itemname, imgid);
+        list=(ListView)findViewById(R.id.list);
+        list.setAdapter(performerAdapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // TODO Auto-generated method stub
+                String Slecteditem= itemname[+position];
+                Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
             }
         });
 

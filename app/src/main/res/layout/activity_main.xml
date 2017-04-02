@@ -11,8 +11,10 @@
     tools:context="com.lahacks.props.MainActivity">
 
     <ListView
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:id="@+id/list" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    </ListView>
 </RelativeLayout>

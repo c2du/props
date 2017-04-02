@@ -21,7 +21,7 @@ import com.lahacks.props.SelectCoinActivity;
  */
 
 public class confirmCoinChoice extends AppCompatActivity {
-
+    public static final String EXTRAA_MESSAGE = "com.lahacks.props.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
